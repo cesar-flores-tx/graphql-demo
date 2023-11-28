@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      port: 27017
+      database: demo
+  profiles:
+    default: default
+graphql:
+  packages:
+    - "com.inmarket.samples.graphqldemo.mutation"
+    - "com.inmarket.samples.graphqldemo.query"
+    - "com.inmarket.samples.graphqldemo.model"
+  print-schema: true
+  playground:
+    enabled: true
