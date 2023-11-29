@@ -3,22 +3,21 @@ package com.inmarket.samples.graphqldemo.service
 import com.inmarket.samples.graphqldemo.model.Demo
 import com.inmarket.samples.graphqldemo.repository.DemoRepository
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
 
 @Service
 class DemoService(private val demoRepository: DemoRepository) {
 
-    fun createDemo(text: String): Mono<Demo> {
-        val model = Demo(text = text)
+    fun createDemo(text: String): Demo {
+        val model = Demo()
+        model.text = text
         return demoRepository.save(model)
     }
 
-    fun findById(demoId: String) : Mono<Demo> {
-        return demoRepository.findById(demoId)
+    fun findById(demoId: String) : Demo {
+        return demoRepository.findById(demoId).orElse(null)
     }
 
-    fun findAll(): Flux<Demo> {
-        return demoRepository.findAll()
+    fun findAll(): List<Demo> {
+        return demoRepository.findAll().toList()
     }
 }
